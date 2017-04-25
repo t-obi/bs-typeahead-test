@@ -26,11 +26,11 @@ class App extends Component {
   };
 
   render() {
-    const { selected, controlled } = this.state;
+    const { selected, controlled, deactivateOnInputChange } = this.state;
 
     const typeaheadProps = controlled ? {
       onChange: this.handleChange,
-      onInputChange: this.handleInputChange,
+      onInputChange: deactivateOnInputChange ? undefined : this.handleInputChange,
       selected,
     } : {};
 
@@ -47,6 +47,15 @@ class App extends Component {
               <input type="checkbox"
                 checked={this.state.controlled}
                 onChange={() => this.setState({controlled: !controlled})}
+              />
+            </label>
+          </div>
+          <div className="row">
+            <label>
+              deactivate onInputChange
+              <input type="checkbox"
+                checked={this.state.deactivateOnInputChange}
+                onChange={() => this.setState({deactivateOnInputChange: !deactivateOnInputChange})}
               />
             </label>
           </div>
